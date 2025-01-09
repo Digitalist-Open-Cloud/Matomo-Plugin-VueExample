@@ -1,6 +1,7 @@
 {
   "VueExample": {
       "MyVueExample": "My Vue example",
-      "MyTitle": "My Title"
+      "MyTitle": "My Title",
+      "MyTitleTooltip": "This is my title"
   }
 }

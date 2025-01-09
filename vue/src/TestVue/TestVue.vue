@@ -6,7 +6,7 @@
 -->
 
 <template>
-  <h3>{{ contentTitle }}</h3>
+  <h3 :title="translate('VueExample_MyTitleTooltip')">{{ contentTitle }}</h3>
   <div class="example-vue">
     <button v-on:click="decrement">-</button>
     {{ count }}

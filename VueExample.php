@@ -13,16 +13,14 @@ class VueExample extends \Piwik\Plugin
 {
     public function registerEvents()
     {
-        return [
-            'CronArchive.getArchivingAPIMethodForPlugin' => 'getArchivingAPIMethodForPlugin',
+        $events = [
+            'Translate.getClientSideTranslationKeys' => 'getClientSideTranslationKeys',
         ];
+        return $events;
     }
 
-    // support archiving just this plugin via core:archive
-    public function getArchivingAPIMethodForPlugin(&$method, $plugin)
+    public function getClientSideTranslationKeys(&$translations)
     {
-        if ($plugin == 'VueExample') {
-            $method = 'VueExample.getExampleArchivedMetric';
-        }
+        $translations[] = 'VueExample_MyTitleTooltip';
     }
 }

@@ -42,6 +42,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { MatomoDialog } from 'CoreHome';
+import { getCurrentInstance } from 'vue';
 
 interface TestVueState {
   count: number;

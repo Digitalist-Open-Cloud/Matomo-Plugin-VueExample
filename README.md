@@ -1,6 +1,15 @@
 # Matomo VueExample Plugin
 
 Step by step guide to do a Matomo plugin using Vue.js and the terminal.
+I wrote this to learn how to use Vue.js with Matomo in a good way, and I hope it could be useful for anyone else that is creating plugins for Matomo.
+
+If any issues with this tutorial, please create an issue in this repo.
+
+## Requirements
+
+A working Matomo dev environment, with Node version 16 and at least PHP 8.2.
+
+## Tutorial
 
 ```shell
 ./console generate:plugin
@@ -27,27 +36,26 @@ class VueExample extends \Piwik\Plugin
 ```
 
 ```shell
-- ./console generate:vue-component
+./console generate:vue-component
 ```
 
 Give the plugin name, and name of Vue component
 
 ```shell
-./console generate:vue-component
 Enter the name of your plugin: VueExample
 Enter the name of the component you want to create: TestVue
 ```
 
-Create a controller, this is used for content
+Create a controller, this is used for content or any endpoint returning "something".
 
 ```shell
 ./console generate:controller
 Enter the name of your plugin: VueExample
 ```
 
-This creates the controller and the template (`templates/index.twig`)
+This creates both the controller and the twig template (`templates/index.twig`). The Twig templated is used for rendering the content.
 
-Edit controller
+Edit `controller.php`
 
 In top, after namespace declaration, add:
 
@@ -97,10 +105,10 @@ In function `configureAdminMenu`, add:
  $menu->addPlatformItem('VueExample_MyVueExample', $this->urlForDefaultAction(), $orderId = 30);
 ```
 
-Now we need a translations for the Menu item (`VueExample_MyVueExample`).
+Now we need a translation for the Menu item (`VueExample_MyVueExample`).
 
-Create a folder called lang in the plugin folder (`VueExample/lang`).
-Create a file called en.json (this is for english, default language).
+Create a folder called `lang` in the plugin folder (`VueExample/lang`).
+Create a file called `en.json` (this is for english, default language).
 Add to file:
 
 ```json
@@ -117,7 +125,7 @@ Build the vue component:
 ./console vue:build VueExample
 ```
 
-You could also build the component continuously, with `--watch` if you are using more than one terminal session.
+You could also build the component continuously, with `--watch` if you are using more than one terminal session and are adding changes to the component.
 
 ```shell
 ./console vue:build VueExample --watch
@@ -140,7 +148,7 @@ From our twig template we can add content to the Vue component.
 
 Edit `templates/index.twig`
 
-Add a heading attribute to the div with the vue component:
+Add a custom content-title attribute to the div with the vue component:
 
 ```html
  <div vue-entry="VueExample.TestVue" content-title="My Title"></div>
@@ -194,7 +202,7 @@ Now you should have a translatable prop for your vue component that you could ad
 
 ## Vue component translatable strings
 
-You can also translatable strings direct in the vue component, then you need to add the translatable string to javascript.
+Bute even better, you can translatable strings direct in the vue component, but you need to add the translatable string to javascript.
 
 Edit `VueExample.php`
 

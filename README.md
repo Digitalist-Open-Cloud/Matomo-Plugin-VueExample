@@ -125,7 +125,7 @@ Edit `templates/index.twig`
 
 Add a heading attribute to the div with the vue component:
 
-```php
+```html
  <div vue-entry="VueExample.TestVue" content-title="My Title"></div>
  ```
 
@@ -170,8 +170,7 @@ Edit `templates/index.twig`
 Set title with translation:
 
 ```php
-content-title="{{ 'VueExample_MyTitle'|translate }}">
+content-title="{{ 'VueExample_MyTitle'|translate }}"
 ```
 
 Now you should have a translatable prop for your vue component that you could add dynamically in your twig template.
-

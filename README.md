@@ -5,11 +5,18 @@ I wrote this to learn how to use Vue.js with Matomo in a good way, and I hope it
 
 If any issues with this tutorial, please create an issue in this repo.
 
-## Requirements
+## Tutorial
 
 A working Matomo dev environment, with Node version 16 and at least PHP 8.2.
 
-## Tutorial
+In Matomo root, make sure you have installed all dependencies:
+
+```shell
+composer install
+npm install
+```
+
+Now, let's get to work.
 
 ```shell
 ./console generate:plugin
@@ -18,7 +25,6 @@ A working Matomo dev environment, with Node version 16 and at least PHP 8.2.
 Give the plugin a name, description, version
 
 ```shell
-./console generate:plugin
 Enter a plugin name: VueExample
 Enter a plugin description: Example for VUE in Matomo
 Enter a plugin version number (default to 0.1.0):
@@ -79,7 +85,7 @@ Replace the whole `public function index()`, with:
     }
 ```
 
-Edit templates/index.twig
+Edit `templates/index.twig`
 
 Remove: `{% extends 'dashboard.twig' %}`
 Set: `{% extends 'admin.twig' %}`
@@ -223,7 +229,7 @@ Add these two functions:
     }
 ```
 
-Matomo have a hook-system, and the events you are registering n your plugin, as in this case, `'Translate.getClientSideTranslationKeys` - you can hook into with your own function, in this case `getTranslations`, and you are adding your own translations in the `$translations` array.
+Matomo have a hook-system, and the events you are registering n your plugin, as in this case, `'Translate.getClientSideTranslationKeys` - you can hook into with your own function, in this case `getTranslations`, and you are adding your own translations in the `$translations` array. This makes translations be available for javascript (like Vue.js)
 
 Edit `vue/src/TestVue/TestVue.vue`
 
@@ -234,3 +240,5 @@ Add:
 ```
 
 `:title` adds the title attribute to the generated HTML.
+
+The reason that you need to add the translation to javascript when using a Vue component, and you don't need that when using Twig, is that Twig renders on the server side, and Vue components in the browser.
